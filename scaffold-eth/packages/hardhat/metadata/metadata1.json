@@ -1,0 +1,9 @@
+{
+  "name": "DiscoverSG: Art Science Museum",
+  "description": "Visited Art Science Museum in Spring 2022",
+  "image": "https://gateway.pinata.cloud/ipfs/QmPFRJQkLiHRXpdezkfKYPmfdZpW83niuLKHNBYqk9VCCV",
+  "attributes": [
+    { "trait_type": "Category", "value": "Arts and Culture" },
+    { "trait_type": "Edition", "value": "2022" }
+  ]
+}
