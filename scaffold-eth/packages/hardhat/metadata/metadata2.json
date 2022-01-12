@@ -1,0 +1,9 @@
+{
+  "name": "DiscoverSG: XYZ Restaurant",
+  "description": "Visited Restaurant XYZ in Spring 2022",
+  "image": "https://gateway.pinata.cloud/ipfs/QmTfj51iiAC9r5CGcJ3isEyqW21UVa4QHk9sABj4K2uzi4",
+  "attributes": [
+    { "trait_type": "Category", "value": "Cuisine" },
+    { "trait_type": "Edition", "value": "2022" }
+  ]
+}
