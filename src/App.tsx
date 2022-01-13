@@ -24,6 +24,7 @@ import {
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Container } from './components/Container';
 
 export const App = () => {
   const Section = (props: any) => {
@@ -119,68 +120,72 @@ export const App = () => {
   };
 
   return (
-    <VStack spacing={7} width="100%">
-      <Section>
-        <Text fontSize={'6xl'} fontWeight="600" textAlign={'center'}>
-          Welcome to DiscoverSG
-        </Text>
-        <Text fontSize={'3xl'} textAlign={'center'} mt="48px">
-          A collection of uniquely Singaporean NFTs that can only be redeemed by exploring local attractions!
-        </Text>
-        <ButtonGroup variant="solid" colorScheme="teal" mt={'48px'}>
-          <HashLink to="#attractions">
-            <Button
-              variant="outline"
-              borderRadius="8px"
-              fontSize={'21px'}
-              p={8}
-              mr={6}
-              // onClick={}
-            >
-              View Attractions
-            </Button>
-            <Button
-              borderRadius="8px"
-              fontSize={'21px'}
-              p={8}
-              // onClick={}
-            >
-              Redeem NFT
-            </Button>
-          </HashLink>
-        </ButtonGroup>
-      </Section>
-      <Section>
-        <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'}>
-          About DiscoverSG
-        </Heading>
-        <Text fontSize={'2xl'} textAlign={'center'} mt="48px">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at efficitur tortor. Donec et tempus odio.
-          Pellentesque consequat, nulla in finibus volutpat, tortor felis porta purus, nec gravida erat tortor at metus.
-          Nunc ac molestie libero. Maecenas eros leo, vestibulum in elementum in, aliquam eu enim. Aenean sed lacus
-          arcu. Pellentesque non accumsan odio. Vivamus augue lorem, consequat cursus ultrices a, varius vel lacus.
-          Pellentesque fermentum eget arcu eget volutpat. Etiam sed rhoncus massa. Maecenas et pharetra justo.
-        </Text>
-      </Section>
-      <Section>
-        <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'} id="attractions">
-          Attractions
-        </Heading>
+    <Container>
+      <VStack spacing={7} width="100%">
+        <Section>
+          <Text fontSize={'6xl'} fontWeight="600" textAlign={'center'}>
+            Welcome to DiscoverSG
+          </Text>
+          <Text fontSize={'3xl'} textAlign={'center'} mt="48px">
+            A collection of uniquely Singaporean NFTs that can only be redeemed by exploring local attractions!
+          </Text>
+          <ButtonGroup variant="solid" colorScheme="teal" mt={'48px'}>
+            <HashLink to="#attractions">
+              <Button
+                variant="outline"
+                borderRadius="8px"
+                fontSize={'21px'}
+                p={8}
+                mr={6}
+                // onClick={}
+              >
+                View Attractions
+              </Button>
+            </HashLink>
+            <Link to="/redeem">
+              <Button
+                borderRadius="8px"
+                fontSize={'21px'}
+                p={8}
+                // onClick={}
+              >
+                Redeem NFT
+              </Button>
+            </Link>
+          </ButtonGroup>
+        </Section>
+        <Section>
+          <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'}>
+            About DiscoverSG
+          </Heading>
+          <Text fontSize={'2xl'} textAlign={'center'} mt="48px">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at efficitur tortor. Donec et tempus odio.
+            Pellentesque consequat, nulla in finibus volutpat, tortor felis porta purus, nec gravida erat tortor at
+            metus. Nunc ac molestie libero. Maecenas eros leo, vestibulum in elementum in, aliquam eu enim. Aenean sed
+            lacus arcu. Pellentesque non accumsan odio. Vivamus augue lorem, consequat cursus ultrices a, varius vel
+            lacus. Pellentesque fermentum eget arcu eget volutpat. Etiam sed rhoncus massa. Maecenas et pharetra justo.
+          </Text>
+        </Section>
+        <Section>
+          <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'} id="attractions">
+            Attractions
+          </Heading>
 
-        <HStack spacing={16} mt={12}>
-          <AttractionCard />
-          <AttractionCard />
-          <AttractionCard />
-        </HStack>
-      </Section>
-      <Section>
-        <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'}>
-          FAQs
-        </Heading>
-        <FAQs />
-      </Section>
-      {/* <Link to="/profile">Profile</Link>
+          <HStack spacing={16} mt={12}>
+            <AttractionCard />
+            <AttractionCard />
+            <AttractionCard />
+          </HStack>
+        </Section>
+        <Section>
+          <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'}>
+            FAQs
+          </Heading>
+          <FAQs />
+        </Section>
+        {/* <Link to="/profile">Profile</Link>
         <Link to="/redeem">Redeem</Link> */}
-    </VStack>
+      </VStack>
+    </Container>
   );
 };

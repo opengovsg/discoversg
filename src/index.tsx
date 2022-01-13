@@ -13,19 +13,16 @@ ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode="dark" />
     <ChakraProvider theme={theme}>
-      <Container>
-        <NavBar />
-        <Stack maxW="100%" minHeight="calc(100vh - 64px)">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="profile/:address" element={<Profile />} />
-              <Route path="redeem" element={<Redeem />} />
-              <Route path="*" element={<App />} />
-            </Routes>
-          </BrowserRouter>
-        </Stack>
-      </Container>
+      <Stack maxW="100%" minHeight="calc(100vh - 64px)">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="profile/:address" element={<Profile />} />
+            <Route path="redeem" element={<Redeem />} />
+            <Route path="*" element={<App />} />
+          </Routes>
+        </BrowserRouter>
+      </Stack>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
