@@ -30,7 +30,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "netlify dev -c \"npm run start\"",
+    "dev": "netlify dev -p 3001 -c \"npm run start\"",
     "start": "export PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
