@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  Provisions the DynamoDB table used to store NFT / inventory information.
+Parameters:
+  TableName:
+    Type: String
+    Default: DiscoverSG
+Outputs:
+  DiscoverSGTableArn:
+    Description: ARN of the DynamoDB table created.
+    Value: !GetAtt Table.Arn
+    Export:
+      Name: DiscoverSGTableArn
+  DiscoverSGTablePolicyArn:
+    Description: ARN of the policy granting CRUD access to the DynamoDB table.
+    Value: !Ref Policy
+    Export:
+      Name: DiscoverSGTablePolicyArn
+Resources:
+  Table:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "PrimaryKey"
+          AttributeType: "S"
+        -
+          AttributeName: "SortKey"
+          AttributeType: "S"
+      KeySchema:
+        -
+          AttributeName: PrimaryKey
+          KeyType: HASH
+        -
+          AttributeName: SortKey
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: '1'
+        WriteCapacityUnits: '1'
+      TableName: !Ref TableName
+  Policy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    DependsOn: Table
+    Properties:
+      Description: 'Read + write access to the table'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'dynamodb:BatchGetItem'
+              - 'dynamodb:BatchWriteItem'
+              - 'dynamodb:ConditionCheckItem'
+              - 'dynamodb:PutItem'
+              - 'dynamodb:DeleteItem'
+              - 'dynamodb:PartiQLUpdate'
+              - 'dynamodb:Scan'
+              - 'dynamodb:ListTagsOfResource'
+              - 'dynamodb:Query'
+              - 'dynamodb:UpdateItem'
+              - 'dynamodb:PartiQLSelect'
+              - 'dynamodb:DescribeTable'
+              - 'dynamodb:PartiQLInsert'
+              - 'dynamodb:GetItem'
+              - 'dynamodb:PartiQLDelete'
+            Resource: !GetAtt Table.Arn
