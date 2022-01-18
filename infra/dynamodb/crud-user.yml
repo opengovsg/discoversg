@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  Provisions a programmatic IAM user that has CRUD permissions on the DB.
+Parameters:
+  DynamoDBTablePolicyArn:
+    Type: String
+    AllowedPattern:
+      "arn:aws:iam::\\d+:\\w+\\/\\S+"
+Outputs:
+  DiscoverSGDynamoDBTableUsername:
+    Description: Username of CRUD user for DynamoDB Table.
+    Value: !Ref User
+Resources:
+  User:
+    Type: 'AWS::IAM::User'
+    Properties:
+      ManagedPolicyArns:
+        - !Ref DynamoDBTablePolicyArn
+  Credentials:
+    Type: 'AWS::IAM::AccessKey'
+    Properties:
+      UserName: !Ref User
+  CredentialsInSecretsManager:
+    Type: 'AWS::SecretsManager::Secret'
+    Properties:
+      Name: !Ref AWS::StackName
+      Description: DynamoDB CRUD user credentials
+      SecretString: !Sub '{"AccessKeyId":"${Credentials}","SecretAccessKey":"${Credentials.SecretAccessKey}"}'
