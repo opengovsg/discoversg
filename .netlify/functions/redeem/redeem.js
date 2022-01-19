@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { mintTo } = require('../services')
+const { sendToAddress } = require('../services')
 
 // Function to handler redemption of NFTs with codes
 const handler = async (event) => {
@@ -16,10 +16,17 @@ const handler = async (event) => {
 
       // Check redemption code is not used
 
+      // Test Redemption Code
+      if (body.code !== 'AAAA') return {
+        statusCode: 404,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: `Code is invalid` })
+      }
+
       // Mark redemption code as used
 
       // Send NFT to address
-      const res = await mintTo("0x71CB05EE1b1F506fF321Da3dac38f25c0c9ce6E1")
+      const res = await sendToAddress(body.address)
 
       return {
         statusCode: 200,

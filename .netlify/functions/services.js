@@ -2,39 +2,40 @@ const ethers = require('ethers')
 const { Wallet } = require('ethers')
 const abi = require('./abi')
 
-
-// Provider to connect via RPCUrl
-
-// Provider to connect o local blockchain
+// Provider to connect to local blockchain
 const localProviderUrl = "http://localhost:8545";
-const localProviderUrlFromEnv = localProviderUrl;
-const localProvider = new ethers.providers.StaticJsonRpcProvider(localProviderUrlFromEnv);
+// Provider to connect via RPCUrl
+const infuraProviderUrl = "https://rinkeby.infura.io/v3/0381915c632140b78efa49ff3f94ac0c";
 
 // Set config with ENVs
-const provider = localProvider // removeProvider
-const deployedContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-const mnemonic = process.env.HOT_WALLET_MNEMONIC
+const providerUrl = localProviderUrl;
+const provider = new ethers.providers.StaticJsonRpcProvider(providerUrl);
+
+const deployedContractAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+
+// Hot Wallet Address 0x9E604F95A8562d40f7e5216731715bac1e57E401
+const hotWalletAddress = '0x9E604F95A8562d40f7e5216731715bac1e57E401'
+const hotWalletPrivateKey = ''
+const signer = new ethers.Wallet(hotWalletPrivateKey, provider);
 
 
-// Hot Wallet Address 0x71CB05EE1b1F506fF321Da3dac38f25c0c9ce6E1
-const wallet = Wallet.fromMnemonic(mnemonic)
-
-const mintTo = async (address) => {
-    return address
-}
-const getTokens = async () => {
-    return wallet.address
-
+const sendToAddress = async (recipientAddress) => {
     // Contract abi isn't providing autocomplete but can reference docs for ERC-721 NFTS
     // https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
-    // const contract = new ethers.Contract(deployedContractAddress, abi, localProvider);
+    const contract = new ethers.Contract(deployedContractAddress, abi, signer);
 
-    // Check balance
-    // const test = await contract.balanceOf("0x9E604F95A8562d40f7e5216731715bac1e57E401")
-    // console.log(test);
+    // Check balance of tokens
+    const balance = (await contract.balanceOf(hotWalletAddress)).toNumber()
+    if (balance === 0) throw new Error('All NFTs have been redeemed')
 
-    // Transfer to someone
-    // const test = await contract.transferFrom(wallet.address)
-    // console.log(test);
+    // Get token id of the zero index
+    const tokenId = (await contract.tokenOfOwnerByIndex(hotWalletAddress, 0)).toNumber()
+    console.log(tokenId);
+
+    // Transfer to recipient
+    await contract.transferFrom(signer.address, recipientAddress, tokenId)
+
+    return recipientAddress
 }
-module.exports = { mintTo, getTokens }
+
+module.exports = { sendToAddress }

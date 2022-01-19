@@ -1,0 +1,9 @@
+{
+  "name": "Hack for Public Good 2022",
+  "description": "Minted as part of hackathon 2022",
+  "image": "https://gateway.pinata.cloud/ipfs/QmcmKnX4wnBZBCLHbDTv8ha7Y6kRhRd6sfvZExzQiRKSQ5",
+  "attributes": [
+    { "trait_type": "Category", "value": "Tech" },
+    { "trait_type": "Edition", "value": "2022" }
+  ]
+}

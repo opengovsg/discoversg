@@ -622,16 +622,6 @@ function App(props) {
 
       <BrowserRouter>
         <Menu style={{ textAlign: "center" }} selectedKeys={[route]} mode="horizontal">
-          <Menu.Item key="/">
-            <Link
-              onClick={() => {
-                setRoute("/");
-              }}
-              to="/"
-            >
-              Gallery
-            </Link>
-          </Menu.Item>
           <Menu.Item key="/yourcollectibles">
             <Link
               onClick={() => {
@@ -650,26 +640,6 @@ function App(props) {
               to="/transfers"
             >
               Transfers
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/ipfsup">
-            <Link
-              onClick={() => {
-                setRoute("/ipfsup");
-              }}
-              to="/ipfsup"
-            >
-              IPFS Upload
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/ipfsdown">
-            <Link
-              onClick={() => {
-                setRoute("/ipfsdown");
-              }}
-              to="/ipfsdown"
-            >
-              IPFS Download
             </Link>
           </Menu.Item>
           <Menu.Item key="/debugcontracts">

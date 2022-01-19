@@ -29,12 +29,12 @@
     "react-icons": "^3.11.0",
     "react-router-dom": "^6.2.1",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "4.0.3",
+    "react-scripts": "4.0.0",
     "typescript": "^3.9.10",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "netlify dev -p 3001 -c \"npm run start\"",
+    "dev": "netlify dev -p 3001 -c \"yarn start\"",
     "start": "export PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
