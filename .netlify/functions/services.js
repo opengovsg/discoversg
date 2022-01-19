@@ -1,6 +1,10 @@
 const ethers = require('ethers')
-const { Wallet } = require('ethers')
 const abi = require('./abi')
+const { BufferList } = require("bl");
+
+const ipfsAPI = require("ipfs-http-client");
+const ipfs = ipfsAPI({ host: "ipfs.infura.io", port: "5001", protocol: "https" });
+
 
 // Provider to connect to local blockchain
 const localProviderUrl = "http://localhost:8545";
@@ -11,7 +15,7 @@ const infuraProviderUrl = "https://rinkeby.infura.io/v3/0381915c632140b78efa49ff
 const providerUrl = localProviderUrl;
 const provider = new ethers.providers.StaticJsonRpcProvider(providerUrl);
 
-const deployedContractAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+const deployedContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 // Hot Wallet Address 0x9E604F95A8562d40f7e5216731715bac1e57E401
 const hotWalletAddress = '0x9E604F95A8562d40f7e5216731715bac1e57E401'
@@ -38,4 +42,48 @@ const sendToAddress = async (recipientAddress) => {
     return recipientAddress
 }
 
-module.exports = { sendToAddress }
+const getTokensForAddress = async (address) => {
+    // Contract abi isn't providing autocomplete but can reference docs for ERC-721 NFTS
+    // https://docs.openzeppelin.com/contracts/3.x/api/token/erc721
+    const contract = new ethers.Contract(deployedContractAddress, abi, signer);
+
+    // Check balance of tokens
+    const balance = (await contract.balanceOf(address)).toNumber()
+
+    const results = [];
+    for (let tokenIndex = 0; tokenIndex < balance; tokenIndex++) {
+        // Get token id of the zero index
+        const tokenId = (await contract.tokenOfOwnerByIndex(address, tokenIndex)).toNumber()
+        console.log('tokenId', tokenId);
+
+        const tokenURI = await contract.tokenURI(tokenId);
+
+        const ipfsHash = tokenURI.replace('https://ipfs.io/ipfs/', '');
+        console.log('ipfsHash', ipfsHash);
+
+        const jsonManifestBuffer = await getFromIPFS(ipfsHash);
+
+        try {
+            const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
+            console.log('jsonManifest', jsonManifest);
+            results.push({ id: tokenId, uri: tokenURI, owner: address, ...jsonManifest });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    return results
+};
+const getFromIPFS = async (hashToGet) => {
+    for await (const file of ipfs.get(hashToGet)) {
+        console.log(file.path);
+        if (!file.content) continue;
+        const content = new BufferList();
+        for await (const chunk of file.content) {
+            content.append(chunk);
+        }
+        return content;
+    }
+};
+
+module.exports = { sendToAddress, getTokensForAddress }
