@@ -60,7 +60,7 @@ async function markRedemptionCodeAsAvailable(code) {
     ExpressionAttributeValues: {
       ':available': { S: 'AVAILABLE' },
     },
-    ConditionExpression: 'attribute_exists(redemptionStatus)', // 'redemptionStatus = :available',
+    ConditionExpression: 'attribute_exists(redemptionStatus)',
     UpdateExpression: 'SET redemptionStatus = :available',
   }
   await client.send(new UpdateItemCommand(params))
