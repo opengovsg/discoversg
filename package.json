@@ -21,6 +21,7 @@
     "@types/react-router-hash-link": "^2.4.4",
     "axios": "^0.21.4",
     "eth-hooks": "2.3.2",
+    "ethereum-address": "^0.0.4",
     "ethers": "^5.5.3",
     "framer-motion": "^4.1.17",
     "ipfs-http-client": "^45.0.0",
@@ -36,8 +37,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "netlify dev -p 3001 -c \"yarn start\"",
-    "start": "export PORT=3001 && react-scripts start",
+    "dev": "netlify dev",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
