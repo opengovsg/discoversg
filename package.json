@@ -37,7 +37,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "dev": "netlify dev",
+    "dev": "source .env && netlify dev",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -15,11 +15,9 @@ const infuraProviderUrl = "https://rinkeby.infura.io/v3/0381915c632140b78efa49ff
 const providerUrl = localProviderUrl;
 const provider = new ethers.providers.StaticJsonRpcProvider(providerUrl);
 
-const deployedContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-
-// Hot Wallet Address 0x9E604F95A8562d40f7e5216731715bac1e57E401
-const hotWalletAddress = '0x9E604F95A8562d40f7e5216731715bac1e57E401'
-const hotWalletPrivateKey = ''
+const deployedContractAddress = process.env.CONTRACT_ADDRESS
+const hotWalletAddress = process.env.HOT_WALLET_ADDRESS
+const hotWalletPrivateKey = process.env.HOT_WALLET_PRIVATE_KEY || ''
 const signer = new ethers.Wallet(hotWalletPrivateKey, provider);
 
 
