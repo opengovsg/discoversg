@@ -1,0 +1,9 @@
+{
+  "name": "Sentosa",
+  "description": "Visited Sentosa",
+  "image": "https://gateway.pinata.cloud/ipfs/QmRen2kXQ7at1Aen4CrS7inCJ9JG4LGwzNZDNzvsU4b6Tp",
+  "attributes": [
+    { "trait_type": "Category", "value": "discoverSG_Venues" },
+    { "trait_type": "Edition", "value": "2022" }
+  ]
+}
