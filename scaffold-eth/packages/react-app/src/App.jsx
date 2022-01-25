@@ -61,7 +61,7 @@ console.log("📦 Assets: ", assets);
 */
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS.matic; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -536,26 +536,23 @@ function App(props) {
   const [transferToAddresses, setTransferToAddresses] = useState({});
 
   const [loadedAssets, setLoadedAssets] = useState();
-  useEffect(() => {
-    const updateYourCollectibles = async () => {
-      const assetUpdate = [];
-      for (const a in assets) {
-        try {
-          const forSale = await readContracts.DiscoverSG.forSale(ethers.utils.id(a));
-          let owner;
-          if (!forSale) {
-            const tokenId = await readContracts.DiscoverSG.uriToTokenId(ethers.utils.id(a));
-            owner = await readContracts.DiscoverSG.ownerOf(tokenId);
-          }
-          assetUpdate.push({ id: a, ...assets[a], forSale, owner });
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      setLoadedAssets(assetUpdate);
-    };
-    if (readContracts && readContracts.DiscoverSG) updateYourCollectibles();
-  }, [assets, readContracts, transferEvents]);
+  // useEffect(() => {
+  //   const updateYourCollectibles = async () => {
+  //     const assetUpdate = [];
+  //     for (const a in assets) {
+  //       try {
+  //         let owner;
+  //         const tokenId = await readContracts.DiscoverSG.uriToTokenId(ethers.utils.id(a));
+  //         owner = await readContracts.DiscoverSG.ownerOf(tokenId);
+  //         assetUpdate.push({ id: a, ...assets[a], owner });
+  //       } catch (e) {
+  //         console.log(e);
+  //       }
+  //     }
+  //     setLoadedAssets(assetUpdate);
+  //   };
+  //   if (readContracts && readContracts.DiscoverSG) updateYourCollectibles();
+  // }, [assets, readContracts, transferEvents]);
 
   const galleryList = [];
   for (const a in loadedAssets) {

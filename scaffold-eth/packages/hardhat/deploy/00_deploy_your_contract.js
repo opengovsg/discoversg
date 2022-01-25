@@ -13,14 +13,14 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   });
 
   const YourContract = await ethers.getContract("DiscoverSG", deployer);
-  console.log('Minting item and sending to wallet');
+  // console.log('Minting item and sending to wallet');
   // Test metadata hash 
   const testHash = "Qmc28kxQs1WfEJAqxqcdg6QiPjRbtoTqjs9ULd3tZNcskT"
-  const hotWalletAddress = "0x9E604F95A8562d40f7e5216731715bac1e57E401"
+  const hotWalletAddress = "0xe1324272Fa528eeFD91944aBe03Aa1bb1727b991"
 
   // await YourContract.mintItem(hotWalletAddress, testHash);
   console.log('Transfering ownership from deployer to wallet');
-  await YourContract.transferOwnership(hotWalletAddress);
+  // await YourContract.transferOwnership(hotWalletAddress);
 
 
   /*

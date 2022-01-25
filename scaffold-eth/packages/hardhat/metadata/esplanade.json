@@ -1,0 +1,9 @@
+{
+  "name": "Esplanade Theatres",
+  "description": "Visited the Esplanade Theatres",
+  "image": "https://gateway.pinata.cloud/ipfs/QmUcVK3mGEnWiHT5tdA1m16JBomCB393Mo2sKYP8MijMm3",
+  "attributes": [
+    { "trait_type": "Category", "value": "discoverSG_Venues" },
+    { "trait_type": "Edition", "value": "2022" }
+  ]
+}
