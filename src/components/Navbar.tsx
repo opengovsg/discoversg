@@ -8,10 +8,10 @@ export const NavBar = (props: any) => {
         <Text fontSize="24px">discoverSG</Text>
       </Link>
       <HStack spacing={8}>
-        <Link href="/">
+        <Link href="/redeem">
           <Text fontSize="18px">Redeem</Text>
         </Link>
-        <Link href="/">
+        <Link href="/discover">
           <Text fontSize="18px">Discover</Text>
         </Link>
         <Link href="/">
@@ -30,7 +30,7 @@ export const NavBar = (props: any) => {
         borderRadius="24px"
         onClick={() => {}}
       >
-        Connect to Wallet
+        Connect Wallet
       </Button>
     </Flex>
   );

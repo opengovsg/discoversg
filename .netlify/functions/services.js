@@ -1,6 +1,7 @@
 const ethers = require('ethers')
 const abi = require('./abi')
 const { BufferList } = require("bl");
+const _ = require('lodash');
 
 const ipfsAPI = require("ipfs-http-client");
 const ipfs = ipfsAPI({ host: "ipfs.infura.io", port: "5001", protocol: "https" });
@@ -70,7 +71,7 @@ const getTokensForAddress = async (address) => {
         }
     }
 
-    return results
+    return _.uniqBy(results, 'uri'); //dedupe to avoid showing multiple
 };
 const getFromIPFS = async (hashToGet) => {
     for await (const file of ipfs.get(hashToGet)) {
