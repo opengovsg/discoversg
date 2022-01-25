@@ -1,8 +1,18 @@
 const { DynamoDBClient, GetItemCommand, UpdateItemCommand } = require('@aws-sdk/client-dynamodb')
 
-const { DYNAMODB_TABLE } = process.env
+const {
+  DISCOVERSG_KEY_ID,
+  DISCOVERSG_KEY_SECRET,
+  DYNAMODB_TABLE,
+} = process.env
 
-const client = new DynamoDBClient({ region: 'ap-southeast-1' })
+const client = new DynamoDBClient({
+  region: 'ap-southeast-1',
+  credentials: {
+    accessKeyId: DISCOVERSG_KEY_ID,
+    secretAccessKey: DISCOVERSG_KEY_SECRET,
+  },
+})
 
 async function isValidRedemptionCode(code) {
   const params = {
