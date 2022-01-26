@@ -1,0 +1,1 @@
+export const NETLIFY_FN_ENDPOINT = '/.netlify/functions'

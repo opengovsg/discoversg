@@ -37,7 +37,7 @@ const handler = async (event) => {
       return {
         statusCode: 200,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: `NFT redeemed to address: ${res}` })
+        body: JSON.stringify({ message: `NFT redeemed successfully`, address: body.address })
       }
     }
     return { statusCode: 404 };

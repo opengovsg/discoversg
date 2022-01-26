@@ -1,9 +1,37 @@
 import * as React from 'react';
-import { Button, Flex, Heading, Input, Text, VStack } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Button, Flex, FormControl, FormErrorMessage, Heading, Input, Text, VStack } from '@chakra-ui/react';
 import { Container } from '../components/Container';
 import { NavBar } from '../components/Navbar';
 import { Link } from 'react-router-dom';
+import ethereum_address from 'ethereum-address';
+import axios from 'axios';
+import { NETLIFY_FN_ENDPOINT } from '../constants';
+
 export default function Redeem() {
+  const [code, setCode] = useState('');
+  const [codeInvalid, setCodeInvalid] = useState(false);
+  const [address, setAddress] = useState('');
+  const [addressInvalid, setAddressInvalid] = useState(false);
+  const redeemNFT = async () => {
+    setCodeInvalid(false);
+    if (!ethereum_address.isAddress(address)) {
+      setAddressInvalid(true);
+      return;
+    }
+    setAddressInvalid(false);
+    try {
+      const res = await axios.post(`${NETLIFY_FN_ENDPOINT}/redeem`, { code, address });
+
+      if (res.data.address) {
+        window.location.replace(`/profile/${res.data.address}`);
+      }
+    } catch (err: any) {
+      if (err.response && err.response.status && err.response.status === 403) {
+        setCodeInvalid(true);
+      }
+    }
+  };
   return (
     <Container>
       <NavBar />
@@ -16,19 +44,50 @@ export default function Redeem() {
           to reserve with your email.
         </Text>
         <Flex direction={'column'} width="400px" mt={8} spacing={4} textAlign={'center'}>
-          <Text fontSize={'xl'} fontWeight={'600'}>
-            Redemption Code
-          </Text>
-          <Input name="nric" placeholder="B17ED8A4Q" fontSize={'xl'} size="lg" width="100%" textAlign={'center'} />
-          <Text fontSize={'xl'} fontWeight={'600'} mt={8}>
-            Wallet Address
-          </Text>
-          <Input name="nric" placeholder="0x3cd1a2e..." fontSize={'xl'} size="lg" width="100%" textAlign={'center'} />
-          <Link to="/">
-            <Text fontSize={'lg'} textDecorationLine={'underline'} mt={2} mb={8}>
-              What's a wallet address?
+          <FormControl isInvalid={codeInvalid}>
+            <Text fontSize={'xl'} fontWeight={'600'}>
+              Redemption Code
             </Text>
-          </Link>
+            <Input
+              name="code"
+              placeholder="B17ED8A4Q"
+              fontSize={'xl'}
+              size="lg"
+              width="100%"
+              textAlign={'center'}
+              onChange={(event: any) => setCode(event.target.value)}
+            />
+            {codeInvalid && (
+              <FormErrorMessage textAlign={'center'} fontSize={'lg'}>
+                Code is invalid.
+              </FormErrorMessage>
+            )}
+          </FormControl>
+          <FormControl isInvalid={addressInvalid}>
+            <Text fontSize={'xl'} fontWeight={'600'} mt={8}>
+              Wallet Address
+            </Text>
+            <Input
+              name="address"
+              placeholder="0x3cd1a2e..."
+              fontSize={'xl'}
+              size="lg"
+              width="100%"
+              textAlign={'center'}
+              onChange={(event: any) => setAddress(event.target.value)}
+            />
+            {addressInvalid && (
+              <FormErrorMessage textAlign={'center'} fontSize={'lg'}>
+                Wallet address is invalid.
+              </FormErrorMessage>
+            )}
+            <Link to="/">
+              <Text fontSize={'lg'} textDecorationLine={'underline'} mt={2} mb={8}>
+                What's a wallet address?
+              </Text>
+            </Link>
+          </FormControl>
+
           <Button
             backgroundColor={'#0085FF'}
             color="white"
@@ -37,6 +96,8 @@ export default function Redeem() {
             fontWeight="500"
             fontSize="21px"
             py={7}
+            disabled={address === '' || code === ''}
+            onClick={redeemNFT}
           >
             Redeem
           </Button>

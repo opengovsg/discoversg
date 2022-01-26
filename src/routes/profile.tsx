@@ -6,8 +6,7 @@ import { NavBar } from '../components/Navbar';
 import { Container } from '../components/Container';
 import ethereum_address from 'ethereum-address';
 import axios from 'axios';
-
-const NETLIFY_FN_ENDPOINT = '/.netlify/functions';
+import { NETLIFY_FN_ENDPOINT } from '../constants';
 
 export default function Profile() {
   let params = useParams();
