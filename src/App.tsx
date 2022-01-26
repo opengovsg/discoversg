@@ -30,7 +30,7 @@ import { NavBar } from './components/Navbar';
 export const App = () => {
   const Section = (props: any) => {
     return (
-      <Flex direction="column" alignItems="center" justifyContent="center" minHeight="30vh" maxWidth="80%">
+      <Flex direction="column" alignItems="center" justifyContent="center" minHeight="35vh" maxWidth="80%">
         {props.children}
       </Flex>
     );
@@ -61,74 +61,15 @@ export const App = () => {
     );
   };
 
-  const FAQs = () => {
-    return (
-      <Accordion defaultIndex={[0]}>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              What is the idea behind DiscoverSG?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              Are DiscoverSG NFTs environmentally-friendly?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              Are DiscoverSG NFTs environmentally-friendly?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              Are DiscoverSG NFTs environmentally-friendly?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    );
-  };
-
   return (
     <Container>
       <NavBar />
       <VStack spacing={7} width="100%">
-        <Section>
+        <Flex direction="column" alignItems="center" justifyContent="center" minHeight="30vh" maxWidth="80%">
           <Box width={'100%'}>
             <Image src="/images/landing.png" alt="Discover Redeem Collect" />
           </Box>
-        </Section>
+        </Flex>
         <Section>
           <Heading fontSize={'4xl'} fontWeight="400" textAlign={'center'}>
             What is discoverSG?
@@ -177,26 +118,14 @@ export const App = () => {
         </Section>
         <Section>
           <Heading fontSize={'4xl'} fontWeight="400" textAlign={'center'}>
-            What is an NFT?
+            Get started in a few minutes
           </Heading>
           <Text fontSize={'xl'} textAlign={'center'} mt="32px" maxWidth="600px">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae fringilla ante. Curabitur nec consectetur
-            nisl. Vestibulum ac commodo dui, ac imperdiet est. In hac habitasse platea dictumst. Vivamus mollis ut
-            tortor eu cursus. Etiam hendrerit lorem quis mi tincidunt consequat. Let’s demistify NFT and cryptocurrency!
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </Text>
-          <Link to="/redeem">
-            <Button
-              mt="24px"
-              backgroundColor={'#0085FF'}
-              color="white"
-              size={'lg'}
-              borderRadius="24px"
-              fontWeight="500"
-              fontSize="18px"
-            >
-              Learn more
-            </Button>
-          </Link>
+          <Box width={'100%'} mt="32px">
+            <Image src="/images/gettingstarted.png" alt="Getting started" />
+          </Box>
         </Section>
       </VStack>
     </Container>

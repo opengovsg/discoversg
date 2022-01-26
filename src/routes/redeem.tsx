@@ -40,8 +40,8 @@ export default function Redeem() {
           Redeem your NFT
         </Heading>
         <Text fontSize={'lg'} textAlign={'center'} mt="32px" maxWidth="400px">
-          Lorem ipsum dolor sit amet? You can choose to redeem your NFT with a redemption code via your wallet or choose
-          to reserve with your email.
+          Redeem your NFT with a redemption code to your wallet address. Alternatively, you may reserve your NFT by
+          registering an email address.
         </Text>
         <Flex direction={'column'} width="400px" mt={8} spacing={4} textAlign={'center'}>
           <FormControl isInvalid={codeInvalid}>
