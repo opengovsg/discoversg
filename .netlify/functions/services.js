@@ -2,7 +2,7 @@ const ethers = require('ethers')
 const abi = require('./abi')
 const { BufferList } = require("bl");
 const _ = require('lodash');
-
+const bluebird = require('bluebird')
 const ipfsAPI = require("ipfs-http-client");
 const ipfs = ipfsAPI({ host: "ipfs.infura.io", port: "5001", protocol: "https" });
 
@@ -46,9 +46,10 @@ const getTokensForAddress = async (address) => {
     // Check balance of tokens
     const balance = (await contract.balanceOf(address)).toNumber()
 
-    const results = [];
-    for (let tokenIndex = 0; tokenIndex < balance; tokenIndex++) {
-        // Get token id of the zero index
+
+    const tokenIndices = [...Array(balance).keys()]
+
+    const results = await bluebird.map(tokenIndices, async (tokenIndex) => {
         const tokenId = (await contract.tokenOfOwnerByIndex(address, tokenIndex)).toNumber()
         console.log('tokenId', tokenId);
 
@@ -59,16 +60,18 @@ const getTokensForAddress = async (address) => {
 
         const jsonManifestBuffer = await getFromIPFS(ipfsHash);
 
+        let res = null
         try {
             const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
             console.log('jsonManifest', jsonManifest);
-            results.push({ id: tokenId, uri: tokenURI, owner: address, ...jsonManifest });
+            res = { id: tokenId, uri: tokenURI, owner: address, ...jsonManifest }
         } catch (e) {
             console.log(e);
         }
-    }
+        return res
+    }, { concurrency: 10 })
 
-    return _.uniqBy(results, 'uri'); //dedupe to avoid showing multiple
+    return _.uniqBy(_.compact(results), 'uri'); //dedupe to avoid showing multiple of an NFT
 };
 const getFromIPFS = async (hashToGet) => {
     for await (const file of ipfs.get(hashToGet)) {
