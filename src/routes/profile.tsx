@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Heading, Box, Text, VStack, Flex, Image, SimpleGrid } from '@chakra-ui/react';
+import { Heading, Box, Text, VStack, Flex, Image, SimpleGrid, Tag, TagLabel } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { NavBar } from '../components/Navbar';
 import { Container } from '../components/Container';
 import ethereum_address from 'ethereum-address';
 import axios from 'axios';
-
-const NETLIFY_FN_ENDPOINT = '/.netlify/functions';
+import { NETLIFY_FN_ENDPOINT } from '../constants';
 
 export default function Profile() {
   let params = useParams();
@@ -30,33 +29,34 @@ export default function Profile() {
   return (
     <Container>
       <NavBar />
-
-      <VStack spacing={7} width="100%">
-        <Flex>
-          <Heading fontSize={'4xl'} fontWeight="600" textAlign={'left'}>
+      <Flex direction="column" alignItems="center" justifyContent="center">
+        <Flex width="100%" justifyContent="start" mt={16}>
+          <Heading fontSize={'5xl'} fontWeight="400">
             {`${truncatedAddress}'s Collection`}
           </Heading>
         </Flex>
-        <SimpleGrid columns={[1, null, 3]} spacing="40px">
+        <SimpleGrid columns={[1, null, 3]} spacing="40px" mt={16}>
           {tokens &&
-            tokens.map((item) => (
-              <Box rounded={'lg'} maxW={'240px'} w={'full'} boxShadow={'2xl'}>
-                <Box height={'230px'}>
-                  <Image rounded={'lg'} height={240} width={240} src={item.image} />
+            tokens.map((item, index) => (
+              <Box rounded={'lg'} maxW={'280px'} w={'full'} boxShadow={'lg'}>
+                <Box height={'280px'}>
+                  <Image rounded={'2xl'} height={280} width={280} p={2} pb={0} src={item.image} />
                 </Box>
-                <Box my={0} p={4} textAlign={'center'}>
-                  <Heading fontSize={'2xl'} fontWeight={500}>
-                    {`${item.name} #${item.id}`}
+                <Box p={4} textAlign={'left'}>
+                  <Heading fontSize={'xl'} fontWeight={500}>
+                    {`${item.name}`}
                   </Heading>
                   <Text color={'gray.500'} fontSize={'sm'} mt={2}>
                     {item.description}
                   </Text>
+                  <Tag mt={3} key={index} borderRadius="full" variant="solid" colorScheme="green" py={2} px={4}>
+                    <TagLabel>{item.attributes[0].value}</TagLabel>
+                  </Tag>
                 </Box>
               </Box>
             ))}
         </SimpleGrid>
-        <Flex></Flex>
-      </VStack>
+      </Flex>
     </Container>
   );
 }
