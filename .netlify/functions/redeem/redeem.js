@@ -1,11 +1,10 @@
-const axios = require('axios');
 const { isValidRedemptionCode, markRedemptionCodeAsRedeemed } = require('../dynamodb');
 const { sendToAddress } = require('../services')
 
 // Function to handler redemption of NFTs with codes
 const handler = async (event) => {
   try {
-    const { httpMethod, queryStringParameters } = event
+    const { httpMethod } = event
     if (httpMethod === 'POST') {
 
       const body = JSON.parse(event.body)
@@ -32,7 +31,7 @@ const handler = async (event) => {
       const tokenId = 1
 
       // Send NFT to address
-      const res = await sendToAddress(body.address, tokenId)
+      await sendToAddress(body.address, tokenId)
 
       return {
         statusCode: 200,
