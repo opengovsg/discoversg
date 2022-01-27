@@ -8,6 +8,11 @@
   functionsPort = 3002
   port = 3001
 
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
 #[[redirects]]
 #  from = "/api/*"
 #  to = "/.netlify/functions/:splat"
