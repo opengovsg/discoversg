@@ -9,9 +9,9 @@ const ipfs = ipfsAPI({ host: "ipfs.infura.io", port: "5001", protocol: "https" }
 const localProviderUrl = "http://localhost:8545";
 // Provider to connect via RPCUrl
 // https://rpc-mainnet.maticvigil.com/
-// const rpcProviderUrl = "https://polygon-mainnet.g.alchemy.com/v2/dLLMLJx3t3JroncLDlaU7vRceYS4mOcG";
+const rpcProviderUrl = "https://polygon-mainnet.g.alchemy.com/v2/dLLMLJx3t3JroncLDlaU7vRceYS4mOcG";
 // const rpcProviderUrl = "https://rpc-mumbai.maticvigil.com"
-const rpcProviderUrl = "https://rinkeby.infura.io/v3/0381915c632140b78efa49ff3f94ac0c";
+// const rpcProviderUrl = "https://rinkeby.infura.io/v3/0381915c632140b78efa49ff3f94ac0c";
 
 // Set config with ENVs
 const providerUrl = process.env.PROD === 'true' ? rpcProviderUrl : localProviderUrl;
@@ -33,8 +33,8 @@ const sendToAddress = async (recipientAddress, tokenId) => {
     if (owner !== hotWalletAddress) throw new Error('TokenId has already been redeemed')
 
     // Transfer to recipient
-    const txn = await contract.transferFrom(signer.address, recipientAddress, tokenId);
-    // const txn = await contract.transferFrom(signer.address, recipientAddress, tokenId, { gasLimit: 285000, gasPrice: ethers.utils.parseUnits('500', 'gwei') });
+    // const txn = await contract.transferFrom(signer.address, recipientAddress, tokenId);
+    const txn = await contract.transferFrom(signer.address, recipientAddress, tokenId, { gasLimit: 285000, gasPrice: ethers.utils.parseUnits('500', 'gwei') });
     console.log(txn);
     console.log(txn.maxFeePerGas.toNumber());
     console.log(txn.maxPriorityFeePerGas.toNumber());
