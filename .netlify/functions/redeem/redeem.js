@@ -25,10 +25,7 @@ const handler = async (event) => {
       }
 
       // Mark redemption code as used
-      await markRedemptionCodeAsRedeemed(redemptionCode)
-
-      // Get tokenId from DynamoDB
-      const tokenId = 1
+      const tokenId = await markRedemptionCodeAsRedeemed(redemptionCode)
 
       // Send NFT to address
       await sendToAddress(body.address, tokenId)

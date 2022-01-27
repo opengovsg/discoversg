@@ -32,8 +32,9 @@ async function isValidRedemptionCode(code) {
  * A conditional update to the DynamoDB table, marking status of
  * redemption code as 'REDEEMED'.
  * @param code - Sanitised redemption code.
- * @returns {Promise<void>}
- * @throws if redemption code does not exist or status is not 'AVAILABLE'.
+ * @returns {Promise<string>}
+ * @throws if redemption code does not exist or status is not 'AVAILABLE', or when
+ * tokenId is missing after the update.
  */
 async function markRedemptionCodeAsRedeemed(code) {
   const params = {
@@ -48,8 +49,13 @@ async function markRedemptionCodeAsRedeemed(code) {
     },
     ConditionExpression: 'redemptionStatus = :available',
     UpdateExpression: 'SET redemptionStatus = :redeemed',
+    ReturnValues: 'ALL_NEW',
   }
-  await client.send(new UpdateItemCommand(params))
+  const { Attributes } = await client.send(new UpdateItemCommand(params))
+  if (!Attributes || !Attributes.tokenId || !Attributes.tokenId.S) {
+    throw new Error('Redemption code does not have token ID.')
+  }
+  return Attributes.tokenId.S
 }
 
 
