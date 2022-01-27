@@ -30,12 +30,17 @@ export default function Profile() {
     <Container>
       <NavBar />
       <Flex direction="column" alignItems="center" justifyContent="center">
-        <Flex width="100%" justifyContent="start" mt={16}>
-          <Heading fontSize={'5xl'} fontWeight="400">
+        <Flex width="100%" justifyContent="start" mt={12}>
+          <Heading fontSize={'4xl'} fontWeight="400">
             {`${truncatedAddress}'s Collection`}
           </Heading>
         </Flex>
-        <SimpleGrid columns={[1, null, 3]} spacing="40px" mt={16}>
+        <Flex width="100%" justifyContent="start" mt={4}>
+          <Heading fontSize={'lg'} fontWeight="400">
+            {`New tokens may take a few minutes to appear`}
+          </Heading>
+        </Flex>
+        <SimpleGrid columns={[1, null, 3]} spacing="40px" mt={6}>
           {tokens &&
             tokens.map((item, index) => (
               <Box rounded={'lg'} maxW={'280px'} w={'full'} boxShadow={'lg'}>
