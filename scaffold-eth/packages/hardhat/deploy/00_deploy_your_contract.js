@@ -13,15 +13,18 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   });
 
   const YourContract = await ethers.getContract("DiscoverSG", deployer);
-  console.log('Minting item and sending to wallet');
+  // console.log('Minting item and sending to wallet');
   // Test metadata hash 
-  const testHash = "Qmc28kxQs1WfEJAqxqcdg6QiPjRbtoTqjs9ULd3tZNcskT"
-  const hotWalletAddress = "0x9E604F95A8562d40f7e5216731715bac1e57E401"
+  const hotWalletAddress = "0xe1324272Fa528eeFD91944aBe03Aa1bb1727b991"
 
-  // await YourContract.mintItem(hotWalletAddress, testHash);
+  await YourContract.mintItem(hotWalletAddress, 'Qmeq8NNdNobe16VRVfqaM9yzDvRZzLg877Mft1aouRoBwY'); //natgal
+  // await YourContract.mintItem(hotWalletAddress, 'QmcGA17xNwXgXTQi6UNGPp3SmhXqTEWv6KcunsKLXodgBu'); //sentosa
+  // await YourContract.mintItem(hotWalletAddress, 'QmfMQ1UWvYGwgRrHtu3qAgRutS8huZbMuYKNeiB4HjhanR'); //esplanade
+  // await YourContract.mintItem(hotWalletAddress, 'Qmeq8NNdNobe16VRVfqaM9yzDvRZzLg877Mft1aouRoBwY'); //natgal
+  // await YourContract.mintItem(hotWalletAddress, 'Qmeq8NNdNobe16VRVfqaM9yzDvRZzLg877Mft1aouRoBwY'); //natgal
+
   console.log('Transfering ownership from deployer to wallet');
   await YourContract.transferOwnership(hotWalletAddress);
-
 
   /*
     // Getting a previously deployed contract

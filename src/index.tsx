@@ -6,6 +6,7 @@ import { ChakraProvider, Box, Text, VStack, theme, Flex, HStack, Input, Stack } 
 import { App } from './App';
 import Profile from './routes/profile';
 import Redeem from './routes/redeem';
+import Discover from './routes/discover';
 import { Container } from './components/Container';
 import { NavBar } from './components/Navbar';
 
@@ -17,6 +18,7 @@ ReactDOM.render(
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />} />
+            <Route path="discover" element={<Discover />} />
             <Route path="profile/:address" element={<Profile />} />
             <Route path="redeem" element={<Redeem />} />
             <Route path="*" element={<App />} />

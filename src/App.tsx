@@ -25,11 +25,12 @@ import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Container } from './components/Container';
+import { NavBar } from './components/Navbar';
 
 export const App = () => {
   const Section = (props: any) => {
     return (
-      <Flex direction="column" alignItems="center" justifyContent="center" minHeight="60vh" maxWidth="80%">
+      <Flex direction="column" alignItems="center" justifyContent="center" minHeight="35vh" maxWidth="80%">
         {props.children}
       </Flex>
     );
@@ -60,131 +61,72 @@ export const App = () => {
     );
   };
 
-  const FAQs = () => {
-    return (
-      <Accordion defaultIndex={[0]}>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              What is the idea behind DiscoverSG?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              Are DiscoverSG NFTs environmentally-friendly?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              Are DiscoverSG NFTs environmentally-friendly?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton>
-            <Text flex="1" textAlign="left" fontSize={'21px'} fontWeight={'500'}>
-              Are DiscoverSG NFTs environmentally-friendly?
-            </Text>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    );
-  };
-
   return (
     <Container>
+      <NavBar />
       <VStack spacing={7} width="100%">
+        <Flex direction="column" alignItems="center" justifyContent="center" minHeight="30vh" maxWidth="80%">
+          <Box width={'100%'}>
+            <Image src="/images/landing.png" alt="Discover Redeem Collect" />
+          </Box>
+        </Flex>
         <Section>
-          <Text fontSize={'6xl'} fontWeight="600" textAlign={'center'}>
-            Welcome to DiscoverSG
-          </Text>
-          <Text fontSize={'3xl'} textAlign={'center'} mt="48px">
-            A collection of uniquely Singaporean NFTs that can only be redeemed by exploring local attractions!
-          </Text>
-          <ButtonGroup variant="solid" colorScheme="teal" mt={'48px'}>
-            <HashLink to="#attractions">
-              <Button
-                variant="outline"
-                borderRadius="8px"
-                fontSize={'21px'}
-                p={8}
-                mr={6}
-                // onClick={}
-              >
-                View Attractions
-              </Button>
-            </HashLink>
-            <Link to="/redeem">
-              <Button
-                borderRadius="8px"
-                fontSize={'21px'}
-                p={8}
-                // onClick={}
-              >
-                Redeem NFT
-              </Button>
-            </Link>
-          </ButtonGroup>
-        </Section>
-        <Section>
-          <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'}>
-            About DiscoverSG
+          <Heading fontSize={'4xl'} fontWeight="400" textAlign={'center'}>
+            What is discoverSG?
           </Heading>
-          <Text fontSize={'2xl'} textAlign={'center'} mt="48px">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at efficitur tortor. Donec et tempus odio.
-            Pellentesque consequat, nulla in finibus volutpat, tortor felis porta purus, nec gravida erat tortor at
-            metus. Nunc ac molestie libero. Maecenas eros leo, vestibulum in elementum in, aliquam eu enim. Aenean sed
-            lacus arcu. Pellentesque non accumsan odio. Vivamus augue lorem, consequat cursus ultrices a, varius vel
-            lacus. Pellentesque fermentum eget arcu eget volutpat. Etiam sed rhoncus massa. Maecenas et pharetra justo.
+          <Text fontSize={'xl'} textAlign={'center'} mt="32px" maxWidth="600px">
+            DiscoverSG’s vision is to create a more tangible connection between local establishments and our citizens
+            while giving government agencies a platform to build digital campaigns on in the future, to boost footfalls
+            to any place in Singapore.
           </Text>
+          <Link to="/redeem">
+            <Button
+              mt="24px"
+              backgroundColor={'#0085FF'}
+              color="white"
+              size={'lg'}
+              borderRadius="24px"
+              fontWeight="500"
+              fontSize="18px"
+            >
+              Discover
+            </Button>
+          </Link>
         </Section>
         <Section>
-          <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'} id="attractions">
-            Attractions
+          <Heading fontSize={'4xl'} fontWeight="400" textAlign={'center'}>
+            What is an NFT?
           </Heading>
-
-          <HStack spacing={16} mt={12}>
-            <AttractionCard />
-            <AttractionCard />
-            <AttractionCard />
-          </HStack>
+          <Text fontSize={'xl'} textAlign={'center'} mt="32px" maxWidth="600px">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae fringilla ante. Curabitur nec consectetur
+            nisl. Vestibulum ac commodo dui, ac imperdiet est. In hac habitasse platea dictumst. Vivamus mollis ut
+            tortor eu cursus. Etiam hendrerit lorem quis mi tincidunt consequat. Let’s demistify NFT and cryptocurrency!
+          </Text>
+          <Link to="/redeem">
+            <Button
+              mt="24px"
+              backgroundColor={'#0085FF'}
+              color="white"
+              size={'lg'}
+              borderRadius="24px"
+              fontWeight="500"
+              fontSize="18px"
+            >
+              Learn more
+            </Button>
+          </Link>
         </Section>
         <Section>
-          <Heading fontSize={'5xl'} fontWeight="600" textAlign={'center'}>
-            FAQs
+          <Heading fontSize={'4xl'} fontWeight="400" textAlign={'center'}>
+            Get started in a few minutes
           </Heading>
-          <FAQs />
+          <Text fontSize={'xl'} textAlign={'center'} mt="32px" maxWidth="600px">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Text>
+          <Box width={'100%'} mt="32px">
+            <Image src="/images/gettingstarted.png" alt="Getting started" />
+          </Box>
         </Section>
-        {/* <Link to="/profile">Profile</Link>
-        <Link to="/redeem">Redeem</Link> */}
       </VStack>
     </Container>
   );

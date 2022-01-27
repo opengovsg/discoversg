@@ -1,0 +1,9 @@
+{
+  "name": "National Gallery",
+  "description": "Visited the National Gallery",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdY5uyeqp5Gn6q43ZcM6VHzGiBHohcgdzT2P1q5bRSXZC",
+  "attributes": [
+    { "trait_type": "Category", "value": "discoverSG_Venues" },
+    { "trait_type": "Edition", "value": "2022" }
+  ]
+}
