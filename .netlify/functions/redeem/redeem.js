@@ -29,7 +29,7 @@ const handler = async (event) => {
       const tokenId = await markRedemptionCodeAsRedeemed(redemptionCode)
 
       // Send NFT to address
-      await sendToAddress(body.address, tokenId)
+      sendToAddress(body.address, tokenId)
 
       return {
         statusCode: 200,
