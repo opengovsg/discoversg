@@ -1,4 +1,4 @@
-const { isValidRedemptionCode, markRedemptionCodeAsRedeemed } = require('../dynamodb');
+const { isValidRedemptionCode, markRedemptionCodeAsRedeemed, markRedemptionCodeAsAvailable } = require('../dynamodb');
 const { sendToAddress } = require('../services')
 
 // Function to handler redemption of NFTs with codes
@@ -14,6 +14,7 @@ const handler = async (event) => {
       }
 
       const redemptionCode = body.code
+      // await markRedemptionCodeAsAvailable(redemptionCode)
 
       const redemptionValid = await isValidRedemptionCode(redemptionCode)
 
@@ -21,7 +22,7 @@ const handler = async (event) => {
       if (!redemptionValid) return {
         statusCode: 403,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: `Code is invalid` })
+        body: JSON.stringify({ message: `Code is invalid or has already been redeemed` })
       }
 
       // Mark redemption code as used
